@@ -46,17 +46,25 @@ function _many(filter_dict){
         }
     }
     if(filter_dict.sorted !== undefined){
-        sortJsonArrayByProperty(_elements, filter_dict.sorted)
+        sortJsonArrayByProperty(_elements, filter_dict.sorted);
     }
     return _elements;
 }
 
 function _one(filter_dict){
+    var objects = this.many(filter_dict);
+    if(objects.length){
+        return objects[0];
+    }
+}
+
+function _first(filter_dict){
     return this.many(filter_dict)[0];
 }
 
 Chancleta.prototype = {
     all: _all,
     one: _one,
+    first: _first,
     many: _many
 };
